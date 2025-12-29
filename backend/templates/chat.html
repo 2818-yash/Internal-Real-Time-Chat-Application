@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chat</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f6f8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+.chat{
+    width:380px;
+    height:550px;
+    background:#fff;
+    border-radius:10px;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+.header{
+    background:#4a6cf7;
+    color:#fff;
+    padding:12px;
+    text-align:center;
+}
+.messages{
+    flex:1;
+    padding:10px;
+    overflow-y:auto;
+}
+.msg{
+    margin-bottom:8px;
+    max-width:75%;
+    padding:8px;
+    border-radius:6px;
+}
+.me{
+    background:#4a6cf7;
+    color:#fff;
+    margin-left:auto;
+}
+.other{
+    background:#e5e7eb;
+}
+.name{
+    font-size:11px;
+    font-weight:bold;
+}
+.input{
+    display:flex;
+    border-top:1px solid #ddd;
+}
+input{
+    flex:1;
+    padding:10px;
+    border:none;
+}
+button{
+    padding:10px;
+    border:none;
+    background:#4a6cf7;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat">
+    <div class="header">
+    {{ me }} chatting with {{ other }}
+    <a href="/logout/" style="float:right;color:white">Logout</a>
+</div>
+
+
+    <div class="messages" id="messages">
+        {% for msg in messages %}
+        <div class="msg {% if msg.username == me %}me{% else %}other{% endif %}">
+            <div class="name">{{ msg.username }}</div>
+            {{ msg.message }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="input">
+        <input id="input" placeholder="Type message..."
+        onkeydown="if(event.key==='Enter') send()">
+        <button onclick="send()">Send</button>
+    </div>
+</div>
+
+<script>
+const USERNAME = "{{ me }}";
+const socket = new WebSocket("ws://127.0.0.1:8000/ws/chat/");
+
+socket.onmessage = function(e){
+    const data = JSON.parse(e.data);
+    addMsg(data.username, data.message);
+};
+
+function send(){
+    const input = document.getElementById("input");
+    if(!input.value.trim()) return;
+
+    socket.send(JSON.stringify({
+        username: USERNAME,
+        message: input.value
+    }));
+
+    input.value = "";
+}
+
+function addMsg(user,text){
+    const div = document.createElement("div");
+    div.className = "msg " + (user === USERNAME ? "me":"other");
+    div.innerHTML = `<div class="name">${user}</div>${text}`;
+    document.getElementById("messages").appendChild(div);
+}
+</script>
+
+</body>
+</html>

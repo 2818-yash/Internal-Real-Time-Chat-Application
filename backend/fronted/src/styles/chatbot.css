@@ -1,0 +1,313 @@
+/* =======================
+   GLOBAL RESET
+======================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f6f8;
+}
+
+/* =======================
+   FLOATING CHATBOT BUTTON
+======================= */
+.chat-fab {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+
+  width: 64px;
+  height: 64px;
+
+  background-image: url("https://cdn-icons-png.flaticon.com/512/4712/4712109.png");
+  background-size: 36px 36px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  background-color: #6a7cff;
+  border-radius: 50%;
+
+  cursor: pointer;
+  z-index: 1000;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease;
+}
+
+.chat-fab:hover {
+  transform: scale(1.08);
+}
+
+/* 🔴 NOTIFICATION BADGE */
+.chat-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+
+  min-width: 20px;
+  height: 20px;
+
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =======================
+   CHAT WIDGET CONTAINER
+======================= */
+.chat-widget {
+  position: fixed;
+  bottom: 96px;
+  right: 22px;
+
+  width: 360px;
+  height: 520px;
+
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 999;
+}
+
+/* =======================
+   CHAT HEADER
+======================= */
+.chat-header {
+  background: linear-gradient(135deg, #6a7cff, #8f6bff);
+  color: white;
+
+  padding: 14px;
+  font-weight: 600;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header .close {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* =======================
+   CHAT BODY (BG IMAGE)
+======================= */
+.chat-body {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+
+  background-image: url("https://images.unsplash.com/photo-1521791136064-7986c2920216");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: relative;
+}
+
+/* Overlay for readability */
+.chat-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.75);
+  z-index: 0;
+}
+
+.chat-body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* =======================
+   USER GRID VIEW
+======================= */
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+/* USER CARD */
+.user-card {
+  background: #f4f6f8;
+  border-radius: 16px;
+  padding: 16px 10px;
+  text-align: center;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.user-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6a7cff, #8f6bff);
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* =======================
+   MESSAGES
+======================= */
+.messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.msg {
+  margin-bottom: 10px;
+  max-width: 75%;
+  padding: 8px 10px;
+  border-radius: 12px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.msg.me {
+  background: linear-gradient(135deg, #6a7cff, #8f6bff);
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.msg.other {
+  background: #e5e7eb;
+  color: #111;
+  border-bottom-left-radius: 4px;
+}
+
+.msg .name {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-bottom: 3px;
+}
+
+/* IMAGE MESSAGE */
+.chat-image {
+  max-width: 180px;
+  border-radius: 10px;
+  margin-top: 6px;
+}
+
+/* =======================
+   INPUT AREA
+======================= */
+.input {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  background: #ffffff;
+  padding: 6px;
+}
+
+.input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+/* IMAGE BUTTON */
+.img-btn {
+  width: 36px;
+  height: 36px;
+
+  background-image: url("https://cdn-icons-png.flaticon.com/512/1828/1828925.png");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.img-btn:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+/* SEND BUTTON */
+.send-btn {
+  padding: 0 14px;
+  border: none;
+  background: linear-gradient(135deg, #6a7cff, #8f6bff);
+  color: white;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+/* =======================
+   TOAST POPUP
+======================= */
+.toast {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  z-index: 2000;
+  animation: toastFade 3s ease;
+}
+
+@keyframes toastFade {
+  0% { opacity: 0; transform: translate(-50%, -10px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}

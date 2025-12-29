@@ -1,0 +1,261 @@
+/* =========================
+   GLOBAL RESET
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* =========================
+   FLOATING CHAT BOT BUTTON
+========================= */
+.chat-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  width: 60px;
+  height: 60px;
+
+  background-color: #4a6cf7;
+  background-image: url("https://cdn-icons-png.flaticon.com/512/4712/4712109.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  z-index: 1000;
+}
+
+.chat-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================
+   UNREAD BADGE
+========================= */
+.chat-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+
+  min-width: 20px;
+  height: 20px;
+
+  background: red;
+  color: white;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 0 0 2px white;
+}
+
+/* =========================
+   CHAT WIDGET CONTAINER
+========================= */
+.chat-bg {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+
+  width: 360px;
+  height: 520px;
+
+  background: #ffffff;
+  border-radius: 18px;
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  z-index: 999;
+  pointer-events: auto;
+}
+
+/* =========================
+   CHAT HEADER
+========================= */
+.chat-header {
+  background: linear-gradient(135deg, #4a6cf7, #7f53ff);
+  color: white;
+
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header .close {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* =========================
+   CHAT BODY
+========================= */
+.chat-body {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  background: #f9faff;
+}
+
+/* =========================
+   MESSAGE BUBBLES
+========================= */
+.msg {
+  max-width: 75%;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+
+  border-radius: 12px;
+  font-size: 14px;
+  animation: fadeIn 0.2s ease;
+}
+
+.msg.me {
+  background: linear-gradient(135deg, #4a6cf7, #7f53ff);
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.msg.other {
+  background: #e5e7eb;
+  color: #111;
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+}
+
+.msg .name {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.7;
+  margin-bottom: 3px;
+}
+
+/* =========================
+   CHAT IMAGE
+========================= */
+.chat-image {
+  max-width: 180px;
+  border-radius: 10px;
+  margin-top: 6px;
+}
+
+/* =========================
+   INPUT AREA
+========================= */
+.input {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-top: 1px solid #ddd;
+  background: white;
+}
+
+.input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+/* IMAGE BUTTON */
+.img-btn {
+  width: 36px;
+  height: 36px;
+
+  background-image: url("https://cdn-icons-png.flaticon.com/512/1828/1828925.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px;
+
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+/* SEND BUTTON */
+.send-btn {
+  padding: 8px 14px;
+  border: none;
+  background: #4a6cf7;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* =========================
+   TOAST POPUP
+========================= */
+.toast {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: #333;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 20px;
+
+  font-size: 13px;
+  z-index: 2000;
+
+  animation: fade 3s ease;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
