@@ -14,7 +14,11 @@ React, JavaScript, CSS
 Django, Django Channels, WebSockets
 •	Database:
 SQLite (can be replaced with other databases)
+
+
 Project Structure
+
+
 RECT_CHAT_APP/
 ├── backend/
 │   ├── manage.py
@@ -22,6 +26,8 @@ RECT_CHAT_APP/
 ├── frontend/
 │   └── React application
 └── README
+
+
 How It Works
 The backend uses Django Channels to manage WebSocket connections. The frontend React application establishes a WebSocket connection with the server to send and receive messages instantly. Images are uploaded and transmitted within the chat interface in real time.
 Setup Instructions
